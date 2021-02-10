@@ -1,30 +1,62 @@
+const sql = require('../datebase');
+
 exports.createType_vaccinate = (req, res) => {
-    console.log('request',req);
-    let response = 'create mundo';
+    sql.query('INSERT INTO Type_vaccinate( Id, Name, Quantity, Expiration) VALUE', (err, res)=>{
+        if (err) {
+            console.log('error:', err);
+            return
+        }
+        if (res.length) {
+            console.log('result', res[0]);
+            return            
+        }
+    })
     res.json({
-        data: response
+        data: 'ok'
     })
 }
 exports.updateType_vaccinate = (req, res) => {
-    console.log('request',req);
-    let response = 'update mundo';
+    sql.query("update Type_vaccinate SET Name='luis' where id='0'", (err, res)=>{
+        if (err) {
+            console.log('error:', err);
+            return
+        }
+        if (res.length) {
+            console.log('result', res[0]);
+            return            
+        }
+    })
     res.json({
-        data: response
+        data: 'ok'
     })
 }
-
 exports.readType_vaccinate = (req, res) => {
-    console.log('request',req);
-    let response = 'read mundo';
+    sql.query('select * from types_vaccines WHERE Id=' + req.params.id, (err, res)=>{
+        if (err) {
+            console.log('error:', err);
+            return
+        }
+        if (res.length) {
+            console.log('result', res[0]);
+            return            
+        }
+    })
     res.json({
-        data: response
+        data: 'ok'
     })
 }
-
 exports.deleteType_vaccinate = (req, res) => {
-    console.log('request',req);
-    let response = 'delete mundo';
+    sql.query('delete from Type_vaccinate where Id =0', (err, res)=>{
+        if (err) {
+            console.log('error:', err);
+            return
+        }
+        if (res.length) {
+            console.log('result', res[0]);
+            return            
+        }
+    })
     res.json({
-        data: response
+        data: 'ok'
     })
 }
