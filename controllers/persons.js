@@ -26,7 +26,7 @@ exports.createPerson = (req, res) => {
 }
 exports.updatePerson = (req, res) => {
     var condition = {"Id": req.body.Id}
-    sql.query("update person SET ? WHERE ?",[req.body, condition] ,(err, res)=>{
+    sql.query("update person SET ? WHERE ?",[req.body, condition],(err, res)=>{
         if (err) {
             console.log('error:', err);
             return
@@ -43,7 +43,7 @@ exports.updatePerson = (req, res) => {
 
 exports.readPersonUnique = (req, res) => {
     console.log(req.params.id);
-    sql.query('select * from person WHERE Id=' + req.params.idper, (err, res)=>{
+    sql.query('select * from person WHERE Id' + req.params.idper, (err, res)=>{
         if (err) {
             console.log('error:', err);
             return
@@ -75,7 +75,7 @@ exports.readPerson = (req, res) => {
 }
 
 exports.deletePerson = (req, res) => {
-    sql.query('delete from person where Id='+ req.params.idper, (err, res)=>{
+    sql.query('delete from person where Id'+ req.params.idper, (err, res)=>{
         if (err) {
             console.log('error:', err);
             return
