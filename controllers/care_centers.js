@@ -54,6 +54,23 @@ exports.readCare_centers = (req, res) => {
     })
 }
 
+exports.readCare_center = (req, res) => {
+    var idcare= rep.params.idcare
+    sql.query('select * from Care_centers where id =' + idcare, (err, res)=>{
+        if (err) {
+            console.log('error:', err);
+            return
+        }
+        if (res.length) {
+            console.log('result', res[0]);
+            return            
+        }
+    })
+    res.json({
+        data: 'ok'
+    })
+}
+
 exports.deleteCare_centers = (req, res) => {
     sql.query('delete from Care_centers where Id'+ req.params.idper, (err, res)=>{
         if (err) {

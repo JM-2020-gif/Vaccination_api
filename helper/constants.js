@@ -1,3 +1,3 @@
 module.exports = {
-    tokenKey: "miclaveultrasecreta123*"
+    tokenKey: process.env.JWT_KEY
 }

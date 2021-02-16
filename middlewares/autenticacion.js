@@ -7,7 +7,7 @@ let verificaAdmin_Role = (req, res, next) => {
 
     //const token = req.headers['auth'];
     const jwt = require('jsonwebtoken');
-    const token = req.headers['jwtAuth'];
+    const token = req.headers['authorization'];
     const tokenKey = require('../helper/constants')
     jwt.verify(token, tokenKey.tokenKey, (err, decoded)=>{
         if (err) {

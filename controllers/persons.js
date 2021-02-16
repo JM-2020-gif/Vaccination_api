@@ -1,5 +1,5 @@
 const sql = require('../datebase');
-
+//POST insert
 exports.createPerson = (req, res) => {
     var person = {
         "Id": req.body.Id,
@@ -9,13 +9,13 @@ exports.createPerson = (req, res) => {
         "Email": req.body.Email,
         "phone": req.body.phone
     }
-    sql.query('INSERT INTO person SET ?', person, (err, res)=>{
+    sql.query('INSERT INTO person SET ?', person, (err, data)=>{
         if (err) {
             console.log('error:', err);
             return
         }
-        if (res.length) {
-            console.log('result', res[0])
+        if (data.length) {
+            console.log('result', data[0])
             return            
         }
     })
@@ -24,68 +24,68 @@ exports.createPerson = (req, res) => {
         "success":"user registered sucessfully"
     });
 }
+
+//PUT- Modificar
 exports.updatePerson = (req, res) => {
     var condition = {"Id": req.body.Id}
-    sql.query("update person SET ? WHERE ?",[req.body, condition],(err, res)=>{
+    sql.query("update person SET ? WHERE ?",[req.body, condition],(err, data)=>{
         if (err) {
             console.log('error:', err);
             return
         }
-        if (res.length) {
-            console.log('result', res[0]);
+        if (data.length) {
+            console.log('result', data[0]);
             return            
         }
     })
     res.json({
-        data: 'ok'
+        data: 'updated ok'
     })
 }
 
+//GET Traer
 exports.readPersonUnique = (req, res) => {
     console.log(req.params.id);
-    sql.query('select * from person WHERE Id' + req.params.idper, (err, res)=>{
+    sql.query('select * from person WHERE Id=' + req.params.idper, (err, data)=>{
         if (err) {
             console.log('error:', err);
             return
         }
-        if (res.length) {
-            console.log('result', res[0]);
+        if (data.length) {
+            console.log('result', data[0]);
+            res.send(data[0])
             return            
         }
-    })
-    res.json({
-        data: 'ok'
     })
 }
 
 exports.readPerson = (req, res) => {
-    sql.query('select * from person', (err, res)=>{
+    sql.query('select * from person', (err, data)=>{
         if (err) {
             console.log('error:', err);
             return
         }
-        if (res.length) {
-            console.log('result', res[0]);
+        if (data.length) {
+            console.log('result', data[0]);
+            res.send(data)
             return            
         }
-    })
-    res.json({
-        data: 'ok'
     })
 }
 
+
 exports.deletePerson = (req, res) => {
-    sql.query('delete from person where Id'+ req.params.idper, (err, res)=>{
+    sql.query('delete from person where Id ='+ req.params.idper, (err, data)=>{
         if (err) {
             console.log('error:', err);
             return
         }
-        if (res.length) {
-            console.log('result', res[0]);
+        if (data.length) {
+            console.log('result', data[0]);
             return            
         }
     })
     res.json({
-        data: 'ok'
+        data: 'deleted'
     })
 }

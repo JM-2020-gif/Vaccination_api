@@ -8,6 +8,7 @@ const {deleteCare_centers} = require('../controllers/care_centers')
 /* GET home page. */
 router.post('/api/v1/createCare_centers', verificaAdmin_Role,createCare_centers);
 router.get('/api/v1/readCare_centers', verificaAdmin_Role,readCare_centers);
+router.get('/api/v1/readCare_centers/:idcare', verificaAdmin_Role,readCare_centers);
 router.put('/api/v1/updateCare_centers', verificaAdmin_Role,updateCare_centers);
 router.delete('/api/v1/deleteCare_centers', verificaAdmin_Role,deleteCare_centers);
 
