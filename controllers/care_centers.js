@@ -8,13 +8,13 @@ exports.createCare_centers = (req, res) => {
         "Schedule": req.body.Schedule,
         "TypeOfVaccines": req.body.TypeOfVaccines
     }
-    sql.query('INSERT INTO Care_centers SET ?', centers, (err, res)=>{
+    sql.query('INSERT INTO Care_centers SET ?', centers, (err, data)=>{
         if (err) {
             console.log('error:', err);
             return
         }
-        if (res.length) {
-            console.log('result', res[0]);
+        if (data.length) {
+            console.log('result', data[0]);
             return            
         }
     })
@@ -23,14 +23,16 @@ exports.createCare_centers = (req, res) => {
         "success":"user registered sucessfully"
     });
 }
+
 exports.updateCare_centers = (req, res) => {
-    sql.query("update Care_centers SET ? WHERE ?", [req.body, condition],(err, res)=>{
+    var condition = {"Id": req.body.Id}
+    sql.query("update Care_centers SET ? WHERE ?", [req.body, condition],(err, data)=>{
         if (err) {
             console.log('error:', err);
             return
         }
         if (res.length) {
-            console.log('result', res[0]);
+            console.log('result', data[0]);
             return            
         }
     })
@@ -38,51 +40,47 @@ exports.updateCare_centers = (req, res) => {
         data: 'ok'
     })
 }
-exports.readCare_centers = (req, res) => {
-    sql.query('select * from Care_centers', (err, res)=>{
+exports.readCare_centersUnique = (req, res) => {
+    console.log(req.params.id);
+    sql.query('select * from Care_centers WHERE Id=' + req.params.idper, (err, data)=>{
         if (err) {
             console.log('error:', err);
             return
         }
-        if (res.length) {
-            console.log('result', res[0]);
+        if (data.length) {
+            console.log('result', data[0]);
+            res.send(data[0])
             return            
         }
-    })
-    res.json({
-        data: 'ok'
     })
 }
 
 exports.readCare_center = (req, res) => {
-    var idcare= rep.params.idcare
-    sql.query('select * from Care_centers where id =' + idcare, (err, res)=>{
+    sql.query('select * from Care_centers', (err, data)=>{
         if (err) {
             console.log('error:', err);
             return
         }
-        if (res.length) {
-            console.log('result', res[0]);
+        if (data.length) {
+            console.log('result', data[0]);
+            res.send(data)
             return            
         }
-    })
-    res.json({
-        data: 'ok'
     })
 }
 
 exports.deleteCare_centers = (req, res) => {
-    sql.query('delete from Care_centers where Id'+ req.params.idper, (err, res)=>{
+    sql.query('delete from Care_centers where Id'+ req.params.idcare, (err, data)=>{
         if (err) {
             console.log('error:', err);
             return
         }
-        if (res.length) {
-            console.log('result', res[0]);
+        if (dta.length) {
+            console.log('result', data[0]);
             return            
         }
     })
     res.json({
-        data: 'ok'
+        data: 'deleted Care Center'
     })
 }

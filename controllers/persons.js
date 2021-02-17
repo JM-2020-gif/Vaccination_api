@@ -15,7 +15,7 @@ exports.createPerson = (req, res) => {
             return
         }
         if (data.length) {
-            console.log('result', data[0])
+            console.log('result', data[0]);
             return            
         }
     })
